@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Checkbox } from '@material-ui/core';
 
 const StyledMovie = styled.li`
@@ -14,23 +14,18 @@ const StyledMovie = styled.li`
   }
 `;
 
-export const Movie = ({ movie, addMovie, removeMovie }) => {
-  const [checked, setChecked] = useState(false);
-  const didMountRef = useRef(null);
-
-  useEffect(() => {
-    if (didMountRef.current) {
-      if (checked) {
-        addMovie(movie);
-      } else {
-        removeMovie(movie);
-      }
-    } else didMountRef.current = true;
-  }, [checked, addMovie, movie, removeMovie]);
+export const Movie = ({ movie, addMovie, removeMovie, checked }) => {
+  const handleCheck = () => {
+    if (!checked) {
+      addMovie(movie);
+    } else {
+      removeMovie(movie);
+    }
+  };
 
   return (
-    <StyledMovie role='button' onClick={() => setChecked(!checked)}>
-      <Checkbox checked={checked} name={movie.imdbID}></Checkbox>
+    <StyledMovie role='button' onClick={handleCheck}>
+      <Checkbox checked={checked} name={movie.imdbID} onChange={handleCheck}></Checkbox>
       <img src={movie.Poster} width='10%' alt=''></img>
       <span style={{ flexBasis: '50%' }}>
         {movie.Title} ({movie.Year})

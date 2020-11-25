@@ -10,13 +10,14 @@ const MoviesContainer = styled.ul`
   margin: 0 0.3em;
   list-style-type: none;
 `;
-export const MovieList = ({ movies, addMovie, removeMovie }) => {
+export const MovieList = ({ movies, addMovie, removeMovie, isMovieChecked }) => {
   return (
     <MoviesContainer>
       {movies.map(
         (item) =>
           item.Poster !== 'N/A' && (
             <Movie
+              checked={isMovieChecked(item)}
               movie={item}
               addMovie={addMovie}
               removeMovie={removeMovie}

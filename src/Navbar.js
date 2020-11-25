@@ -19,7 +19,7 @@ const Form = styled.form`
   flex-basis: 50%;
 `;
 
-export const Navbar = ({ handleSubmit, handleChange, inputValue }) => {
+export const Navbar = ({ handleSubmit, handleInputChange, inputValue }) => {
   return (
     <Bar>
       <img
@@ -27,7 +27,12 @@ export const Navbar = ({ handleSubmit, handleChange, inputValue }) => {
         alt=''
       ></img>
       <Form noValidate autoComplete='off' onSubmit={handleSubmit}>
-        <SearchBar value={inputValue} type='text' name='search' onChange={handleChange}></SearchBar>
+        <SearchBar
+          value={inputValue}
+          type='text'
+          name='search'
+          onChange={handleInputChange}
+        ></SearchBar>
       </Form>
       <Button onClick={handleSubmit} variant='contained' color='primary'>
         Search

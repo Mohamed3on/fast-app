@@ -64,9 +64,11 @@ function App() {
     setSearchValue(inputValue);
     event.preventDefault();
   };
-  const handleChange = (event) => {
+  const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  const isMovieChecked = (movie) => cart.has(movie.imdbID);
 
   useEffect(() => {
     fetch(`https://www.omdbapi.com/?apikey=bfb610a2&s=${searchValue}`)
@@ -85,12 +87,17 @@ function App() {
         <Fragment>
           <Navbar
             handleSubmit={handleSubmit}
-            handleChange={handleChange}
+            handleInputChange={handleInputChange}
             inputValue={inputValue}
           ></Navbar>
           {items.length ? (
             <Container>
-              <MovieList addMovie={addMovie} removeMovie={removeMovie} movies={items}></MovieList>
+              <MovieList
+                movies={items}
+                isMovieChecked={isMovieChecked}
+                addMovie={addMovie}
+                removeMovie={removeMovie}
+              ></MovieList>
               <Checkout
                 disabled={cart.size === 0}
                 size='large'
