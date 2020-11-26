@@ -1,33 +1,20 @@
 import './App.css';
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Fab } from '@material-ui/core';
 import { StylesProvider } from '@material-ui/core/styles';
 import { Navbar } from './Navbar';
 import { MovieList } from './MovieList';
-
-const breakpoints = {
-  xs: `(min-width: 320px)`,
-  sm: `(min-width: 768px)`,
-  lg: `(min-width: 1200px)`,
-};
+import { Checkout } from './Checkout';
 
 const Container = styled.div`
   margin: auto;
   margin-top: 1em;
-  @media ${breakpoints.xs} {
+  @media (min-width: 320px) {
     width: 100%;
   }
-  @media ${breakpoints.sm} {
+  @media (min-width: 768px) {
     width: 50%;
   }
-`;
-
-const Checkout = styled(Fab)`
-  margin: auto;
-  width: 70%;
-  display: flex;
-  margin-top: 50px;
 `;
 
 function App() {
@@ -54,7 +41,7 @@ function App() {
     });
   }, []);
 
-  const checkout = () => {
+  const clearCart = () => {
     setCart(new Map());
     setItems([]);
     setInputValue('');
@@ -98,18 +85,10 @@ function App() {
                 addMovie={addMovie}
                 removeMovie={removeMovie}
               ></MovieList>
-              <Checkout
-                disabled={cart.size === 0}
-                size='large'
-                variant='extended'
-                color='primary'
-                onClick={checkout}
-              >
-                <span>{`Checkout (${cart.size ? cart.size : 0})`}</span>
-              </Checkout>
+              <Checkout cart={cart} clearCart={clearCart}></Checkout>
             </Container>
           ) : (
-            'Please enter a search term!'
+            'Please enter a new search term!'
           )}
         </Fragment>
       </StylesProvider>
