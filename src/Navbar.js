@@ -34,7 +34,7 @@ export const Navbar = ({ handleSubmit, handleInputChange, inputValue }) => {
           onChange={handleInputChange}
         ></SearchBar>
       </Form>
-      <Button onClick={handleSubmit} variant='contained' color='primary'>
+      <Button size='large' onClick={handleSubmit} variant='contained' color='primary'>
         Search
       </Button>
     </Bar>
